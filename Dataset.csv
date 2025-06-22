@@ -1,0 +1,37 @@
+import pandas as pd
+import numpy as np
+
+# Create sample product data
+np.random.seed(42)
+categories = ['Electronics', 'Furniture', 'Clothing', 'Toys']
+sub_categories = {
+    'Electronics': ['Phones', 'Laptops', 'Cameras'],
+    'Furniture': ['Chairs', 'Tables', 'Desks'],
+    'Clothing': ['Shirts', 'Pants', 'Shoes'],
+    'Toys': ['Board Games', 'Action Figures', 'Puzzles']
+}
+
+data = []
+for i in range(200):
+    cat = np.random.choice(categories)
+    sub_cat = np.random.choice(sub_categories[cat])
+    sales = np.random.randint(50, 1000)
+    cost = sales * np.random.uniform(0.6, 0.95)
+    profit = sales - cost
+    inventory_days = np.random.randint(10, 100)
+    region = np.random.choice(['North', 'South', 'East', 'West'])
+    month = np.random.choice(range(1, 13))
+    data.append([cat, sub_cat, sales, cost, profit, inventory_days, region, month])
+
+df = pd.DataFrame(data, columns=[
+    'category', 'sub_category', 'sales', 'cost', 'profit',
+    'inventory_days', 'region', 'month'
+])
+
+df['profit_margin'] = df['profit'] / df['sales']
+
+# Export to CSV
+df.to_csv("retail_sample_data.csv", index=False)
+print("✅ Dataset saved as 'retail_sample_data.csv'")
+df.to_csv("retail_sample_data.csv", index=False)
+
